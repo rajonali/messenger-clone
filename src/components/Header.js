@@ -24,17 +24,6 @@ function Header() {
 
 <div>
 
-<div className="brandlogo" style={{display:'flex', flexDirection:'column'}}>
-                
-    <a href="/">            
-                <img
-                    src="https://facebookbrand.com/wp-content/uploads/2018/09/Header-e1538151782912.png?w=100&h=100"/>
-    </a>
-    
-    <h2>Welcome, Tasnim</h2>
-
-            </div>
-
 </div>
 <div className="Header__buttons" style={{}}>
   <Link style={{textDecoration: "none"}} to="/login">

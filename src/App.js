@@ -10,9 +10,12 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import {BrowserRouter as Router} from "react-router-dom";
-import { Switch, Route, Link } from "react-router-dom";
+import {Switch, Route, Link} from "react-router-dom";
 import Header from './components/Header';
 import Chat from './components/Chat';
+import { Spring } from 'react-spring/renderprops';
+
+
 function App() {
     const [input,
         setInput] = useState('');
@@ -67,54 +70,92 @@ function App() {
         <div className="App">
 
             <Router>
-            <Switch>
-    <Route exact path="/">
-      <Header />
-      <form className="app__form" style={{
-                flex: '1'
-            }}>
-                <Card className="app__card">
-                    <CardContent>
+                <Switch>
+                    <Route exact path="/">
+                        <Header/>
+                        <Spring
+                            from={{
+                            opacity: 0,
+                            marginTop: -500
+                        }}
+                            to={{
+                            opacity: 1,
+                            marginTop: 0
+                        }}>
 
-                        <FormControl className="app__formControl">
 
-                            <Input
-                                placeholder='Enter a message...'
-                                className="app__input"
-                                value={input}
-                                onChange={event => setInput(event.target.value)}/>
-                            <IconButton
-                                className="app__iconButton"
-                                disabled={!input}
-                                color="primary"
-                                onClick={sendMessage}>
-                                <SendIcon/>
-                            </IconButton>
-                        </FormControl>
-                    </CardContent>
-                </Card>
+{props => (
 
-            </form>
+<div style={props}>
+<div
+className="brandlogo"
+style={{
+display: 'flex',
+flexDirection: 'column'
+}}>
 
-      <FlipMove>
-                {messages.map(({id, message}) => (<Message key={id} username={username} message={message}/>))
+<a href="/">
+    <img
+        src="https://facebookbrand.com/wp-content/uploads/2018/09/Header-e1538151782912.png?w=100&h=100"/>
+</a>
+
+<h2>Welcome, Tasnim</h2>
+
+</div>
+</div>
+
+)}
+
+
+
+
+                        </Spring>
+
+                        <form
+                            className="app__form"
+                            style={{
+                            flex: '1'
+                        }}>
+                            <Card className="app__card">
+                                <CardContent>
+
+                                    <FormControl className="app__formControl">
+
+                                        <Input
+                                            placeholder='Enter a message...'
+                                            className="app__input"
+                                            value={input}
+                                            onChange={event => setInput(event.target.value)}/>
+                                        <IconButton
+                                            className="app__iconButton"
+                                            disabled={!input}
+                                            color="primary"
+                                            onClick={sendMessage}>
+                                            <SendIcon/>
+                                        </IconButton>
+                                    </FormControl>
+                                </CardContent>
+                            </Card>
+
+                        </form>
+
+                        <FlipMove>
+                            {messages.map(({id, message}) => (<Message key={id} username={username} message={message}/>))
 }
-            </FlipMove>
+                        </FlipMove>
 
-
-    </Route>
-    <Route path="/register">
-      <Header />
-    </Route>
-    <Route path="/login">
-      <Header />
-    </Route>
-  </Switch>
+                    </Route>
+                    <Route path="/register">
+                        <Header/>
+                    </Route>
+                    <Route path="/login">
+                        <Header/>
+                    </Route>
+                </Switch>
             </Router>
 
-              
         </div>
-        
+
     )
 }
 
