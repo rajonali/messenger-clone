@@ -9,8 +9,10 @@ import SendIcon from '@material-ui/icons/Send';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-
-
+import {BrowserRouter as Router} from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
+import Header from './components/Header';
+import Chat from './components/Chat';
 function App() {
     const [input,
         setInput] = useState('');
@@ -63,35 +65,56 @@ function App() {
 
     return (
         <div className="App">
-            <div className="brandlogo">
-                <img
-                    src="https://facebookbrand.com/wp-content/uploads/2018/09/Header-e1538151782912.png?w=100&h=100"/>
-            </div>
 
-            <h1>Facebook Messenger Clone</h1>
-    <h2>Welcome, {username}</h2>
-            <form className="app__form" style={{flex:'1'}} >
-            <Card className="app__card">
-                <CardContent>
-            
-                <FormControl className="app__formControl">
-                    
-                    <Input placeholder='Enter a message...' className="app__input" value={input} onChange={event => setInput(event.target.value)}/>
-                    <IconButton className="app__iconButton" disabled={!input}
-                        color="primary"
-                        onClick={sendMessage}>
-                    <SendIcon />
-                    </IconButton>
-                </FormControl>
-                </CardContent>
-            </Card>
+            <Router>
+            <Switch>
+    <Route exact path="/">
+      <Header />
+      <form className="app__form" style={{
+                flex: '1'
+            }}>
+                <Card className="app__card">
+                    <CardContent>
+
+                        <FormControl className="app__formControl">
+
+                            <Input
+                                placeholder='Enter a message...'
+                                className="app__input"
+                                value={input}
+                                onChange={event => setInput(event.target.value)}/>
+                            <IconButton
+                                className="app__iconButton"
+                                disabled={!input}
+                                color="primary"
+                                onClick={sendMessage}>
+                                <SendIcon/>
+                            </IconButton>
+                        </FormControl>
+                    </CardContent>
+                </Card>
 
             </form>
-            <FlipMove>
+
+      <FlipMove>
                 {messages.map(({id, message}) => (<Message key={id} username={username} message={message}/>))
 }
             </FlipMove>
+
+
+    </Route>
+    <Route path="/register">
+      <Header />
+    </Route>
+    <Route path="/login">
+      <Header />
+    </Route>
+  </Switch>
+            </Router>
+
+              
         </div>
+        
     )
 }
 
